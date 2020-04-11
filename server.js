@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 const db = process.env['DB_URL_DEV'];
 
 // Connect to MongoDB
-mongoose.connect(db)
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true  })
   .then(() => console.log('MONGO IS CONNECTED'))
   .catch(err => console.error(err));
 
