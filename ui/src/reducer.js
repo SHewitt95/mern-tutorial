@@ -6,7 +6,7 @@ export const DATA_STATES = {
 
 export const initialState = {
   dataState: DATA_STATES.FETCHING,
-  items: ['Milk', 'Cheese', 'Water'], 
+  items: [], 
 };
 
 export const ACTION_TYPES = {
