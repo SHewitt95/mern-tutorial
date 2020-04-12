@@ -38,5 +38,8 @@ export const reducer = (state, action) => {
         ...state,
         items: state.items.filter(item => item !== action.payload),
       };
+
+    default:
+      return state;
   }
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { initialState, reducer, ACTION_TYPES } from './reducer';
+import { reducer, initialState, ACTION_TYPES } from './reducer';
 import axios from 'axios';
 import './App.css';
 
@@ -24,7 +24,6 @@ function App() {
     axios
       .get('/api/items')
       .then(res => {
-        console.log({res})
         if (res.status === 200 && res.statusText === 'OK') {
           dispatch({ type: GET_ITEMS, payload: res.data })
         }
