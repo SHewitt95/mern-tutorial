@@ -8,15 +8,16 @@ const items = require('./routes/api/items');
 
 const app = express();
 
-// Bodyparser Middleware
-app.use(bodyParser.json());
-
 // Headers
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Accept, Referer, Sec-Fetch-Dest, User-Agent");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
   next();
 });
+
+// Bodyparser Middleware
+app.use(bodyParser.json());
 
 // DB Config
 const db = process.env['DB_URL_DEV'];
