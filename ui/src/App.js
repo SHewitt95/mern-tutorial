@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { initialState, reducer } from './reducer';
+import { initialState, reducer, ACTION_TYPES } from './reducer';
 import axios from 'axios';
 import './App.css';
 
-const List = ({ items }) => {
-  return (
-    <ul>
-      {items.map((item, idx) => <li key={idx}>{item}</li>)}
-    </ul>
-  );
-};
+const { DELETE_ITEM } = ACTION_TYPES;
+
+const List = ({ items, dispatch }) => (
+  <ul>
+    {items.map((item, idx) => (
+      <li key={`li-${idx}`}>
+        <button onClick={() => dispatch({ type: DELETE_ITEM, payload: item })}>X</button>
+        {item}
+      </li>
+    ))}
+  </ul>
+);
+
 
 const useItems = () => {
   const [items, setItems] = useState([]);
@@ -30,19 +36,18 @@ const useItems = () => {
 }
 
 function App() {
-  // const items = useItems();
-  const [value, setValue] = useState('');
-  const [state,] = useReducer(reducer, initialState);
+  const [inputValue, setInputValue] = useState('');
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="App">
       <p>Hello</p>
-      <List items={state.items} />
+      <List items={state.items} dispatch={dispatch} />
       <form onSubmit={e => {
         e.preventDefault();
         // addItem([...items, value])
       }}>
-        <input value={value} onChange={e => setValue(e.target.value)} />
+        <input value={inputValue} onChange={e => setInputValue(e.target.value)} />
         <button type="submit">Add Item</button>
       </form>
     </div>
