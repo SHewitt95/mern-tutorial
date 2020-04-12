@@ -36,7 +36,7 @@ export const reducer = (state, action) => {
     case DELETE_ITEM:
       return {
         ...state,
-        items: state.items.filter(item => item !== action.payload),
+        items: state.items.filter(item => item._id !== action.payload),
       };
 
     default:

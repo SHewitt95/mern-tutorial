@@ -9,7 +9,13 @@ const List = ({ items, dispatch }) => (
   <ul>
     {items.map((item) => (
       <li key={item._id}>
-        <button onClick={() => dispatch({ type: DELETE_ITEM, payload: item })}>X</button>
+        <button 
+        onClick={
+          () => {
+            axios.delete(`/api/items/${item._id}`)
+              .then(res => dispatch({ type: DELETE_ITEM, payload: item._id }));
+          }
+        }>X</button>
         {item.name}
       </li>
     ))}
