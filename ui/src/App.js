@@ -3,7 +3,7 @@ import { initialState, reducer, ACTION_TYPES } from './reducer';
 import axios from 'axios';
 import './App.css';
 
-const { DELETE_ITEM } = ACTION_TYPES;
+const { DELETE_ITEM, ADD_ITEM } = ACTION_TYPES;
 
 const List = ({ items, dispatch }) => (
   <ul>
@@ -45,7 +45,8 @@ function App() {
       <List items={state.items} dispatch={dispatch} />
       <form onSubmit={e => {
         e.preventDefault();
-        // addItem([...items, value])
+        dispatch({ type: ADD_ITEM, payload: inputValue });
+        setInputValue('');
       }}>
         <input value={inputValue} onChange={e => setInputValue(e.target.value)} />
         <button type="submit">Add Item</button>
