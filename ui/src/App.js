@@ -36,8 +36,18 @@ function App() {
       <List items={state.items} dispatch={dispatch} />
       <form onSubmit={e => {
         e.preventDefault();
-        dispatch({ type: ADD_ITEM, payload: inputValue });
-        setInputValue('');
+        axios
+          .post('/api/items', { name: inputValue },
+          { 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then(res => {
+            dispatch({ type: ADD_ITEM, payload: res.data });
+            setInputValue('');
+          })
+          .catch(err => console.error(err));
       }}>
         <input value={inputValue} onChange={e => setInputValue(e.target.value)} />
         <button type="submit">Add Item</button>

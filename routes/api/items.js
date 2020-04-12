@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
 
   newItem.save()
     .then(item => res.json(item))
+    .catch(err => console.error(err));
 });
 
 // @route   DELETE api/items
