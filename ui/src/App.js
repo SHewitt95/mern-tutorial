@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
+import { initialState, reducer } from './reducer';
 import axios from 'axios';
 import './App.css';
 
@@ -29,13 +30,14 @@ const useItems = () => {
 }
 
 function App() {
-  const items = useItems();
+  // const items = useItems();
   const [value, setValue] = useState('');
+  const [state,] = useReducer(reducer, initialState);
 
   return (
     <div className="App">
       <p>Hello</p>
-      <List items={items} />
+      <List items={state.items} />
       <form onSubmit={e => {
         e.preventDefault();
         // addItem([...items, value])
